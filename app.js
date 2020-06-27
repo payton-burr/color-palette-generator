@@ -28,10 +28,14 @@ let randomHex = generateHex();
 // console.log(randomHex);
 
 function randomColors() {
+  intialColors = [];
+
   colorPalettes.forEach((div, index) => {
     const hexText = div.children[0];
     const randomColor = generateHex();
     const icons = colorPalettes[index].querySelectorAll('.controls button');
+
+    intialColors.push(chroma(randomColor).hex());
 
     // Set color palette background to random color
     // Make hex text values equal to random color
@@ -100,7 +104,7 @@ function hslControls(e) {
   const brightness = sliders[1];
   const saturation = sliders[2];
 
-  const bgColor = colorPalettes[index].querySelector('h2').innerText;
+  const bgColor = intialColors[index];
 
   let color = chroma(bgColor).set('hsl.s', saturation.value).set('hsl.l', brightness.value).set('hsl.h', hue.value);
 
