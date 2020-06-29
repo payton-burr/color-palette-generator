@@ -45,6 +45,8 @@ closeAdjustment.forEach((button, index) => {
   });
 });
 
+generateBtn.addEventListener('click', randomColors);
+
 //!! Functions
 
 function generateHex() {
@@ -71,12 +73,8 @@ function randomColors() {
 
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
-    checkContrast(randomColor, hexText);
 
     checkContrast(randomColor, hexText);
-    for (icon of icons) {
-      checkContrast(randomColor, icon);
-    }
 
     const color = chroma(randomColor);
     const sliders = div.querySelectorAll('.sliders input');
@@ -88,6 +86,12 @@ function randomColors() {
   });
 
   resetInputs();
+
+  // Check icon contrast
+  adjustButton.forEach((button, index) => {
+    checkContrast(initialColors[index], button);
+    checkContrast(initialColors[index], lockButton[index]);
+  });
 }
 
 function checkContrast(color, text) {
@@ -153,6 +157,7 @@ function updateText(index) {
   hexText.innerText = color.hex();
 
   checkContrast(color, hexText);
+
   for (icon of icons) {
     checkContrast(color, icon);
   }
