@@ -111,6 +111,10 @@ function hslControls(e) {
   let color = chroma(bgColor).set('hsl.s', saturation.value).set('hsl.l', brightness.value).set('hsl.h', hue.value);
 
   colorPalettes[index].style.backgroundColor = color;
+
+  // Update saturation/brightness slider colors
+
+  colorizeSliders(color, hue, brightness, saturation);
 }
 
 function updateText(index) {
@@ -133,7 +137,6 @@ function resetInputs() {
     if (slider.name === 'hue') {
       const hueColor = initialColors[slider.getAttribute('data-hue')];
       const hueValue = chroma(hueColor).hsl()[0];
-      // console.log(hueValue);
       slider.value = Math.floor(hueValue);
     }
 
@@ -146,7 +149,6 @@ function resetInputs() {
     if (slider.name === 'saturation') {
       const satColor = initialColors[slider.getAttribute('data-sat')];
       const satValue = chroma(satColor).hsl()[1];
-      console.log(satValue);
       slider.value = Math.floor(satValue * 100) / 100;
     }
   });
