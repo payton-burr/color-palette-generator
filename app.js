@@ -10,6 +10,10 @@ const closeAdjustment = document.querySelectorAll('.close-adjustment');
 const sliderContainer = document.querySelectorAll('.sliders');
 let initialColors;
 
+//!! Local Storage
+
+let savedPalettes = [];
+
 //!! Event Listeners
 
 sliders.forEach((slider) => {
@@ -225,6 +229,27 @@ function lockControl(index) {
   colorPalettes[index].classList.toggle('locked');
   lockButton[index].children[0].classList.toggle('fa-lock-open');
   lockButton[index].children[0].classList.toggle('fa-lock');
+}
+
+// **************************************************************
+//!! Save to palette and Local Storage
+
+const saveBtn = document.querySelector('.save');
+const submitSave = document.querySelector('.save-submit');
+const closeSave = document.querySelector('.close-save');
+const saveContainer = document.querySelector('.save-container');
+const saveInput = document.querySelector('.save-container input');
+
+//!! Event listeners
+
+saveBtn.addEventListener('click', openPalette);
+
+//!! Functions
+
+function openPalette(e) {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.add('active');
+  popup.classList.add('active');
 }
 
 randomColors();
