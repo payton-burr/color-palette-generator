@@ -4,6 +4,7 @@ const generateBtn = document.querySelector('.generate');
 const sliders = document.querySelectorAll('input[type = "range"]');
 const currentHex = document.querySelectorAll('.color h2');
 const popup = document.querySelector('.copy-container');
+const lockButton = document.querySelectorAll('.lock');
 const adjustButton = document.querySelectorAll('.adjust');
 const closeAdjustment = document.querySelectorAll('.close-adjustment');
 const sliderContainer = document.querySelectorAll('.sliders');
@@ -63,7 +64,6 @@ function randomColors() {
   colorPalettes.forEach((div, index) => {
     const hexText = div.children[0];
     const randomColor = generateHex();
-    const icons = colorPalettes[index].querySelectorAll('.controls button');
 
     initialColors.push(chroma(randomColor).hex());
 
