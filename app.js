@@ -281,6 +281,27 @@ function savePalette(e) {
 
   saveToLocal(paletteObject);
   saveInput.value = '';
+
+  // Generate palette for library
+
+  const palette = document.createElement('div');
+  palette.classList.add('custom-palette');
+
+  const title = document.createElement('h4');
+  title.innerText = paletteObject.name;
+
+  const preview = document.createElement('div');
+  preview.classList.add('small-preview');
+  paletteObject.colors.forEach((color) => {
+    const smallDiv = document.createElement('div');
+    smallDiv.style.backgroundColor = color;
+    preview.appendChild(smallDiv);
+  });
+
+  const paletteBtn = document.createElement('button');
+  paletteBtn.classList.add('pick-palette-btn');
+  paletteBtn.classList.add(paletteObject.num);
+  paletteBtn.innerText = 'Select';
 }
 
 function saveToLocal(paletteObject) {
