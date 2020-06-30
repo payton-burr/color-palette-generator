@@ -62,7 +62,7 @@ path,i,svg {
   pointer-events: all;
 }
 
-.sliders button {
+.sliders button, .close-save {
   position: absolute;
   top: 0;
   right: 0;
@@ -189,4 +189,20 @@ input[type=range]::-ms-thumb {
 
 .copy-popup h4, .save-popup h4, .library-popup h4 {
   font-size: 2rem;
+  padding: 2rem;
+}
+
+.save-name {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.save-submit {
+  margin: 2rem;
+  padding: 1rem 3rem;
+  background: #1d3557;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
 }

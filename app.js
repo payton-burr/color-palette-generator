@@ -243,6 +243,7 @@ const saveInput = document.querySelector('.save-container input');
 //!! Event listeners
 
 saveBtn.addEventListener('click', openPalette);
+closeSave.addEventListener('click', closePalette);
 
 //!! Functions
 
@@ -250,6 +251,12 @@ function openPalette(e) {
   const popup = saveContainer.children[0];
   saveContainer.classList.add('active');
   popup.classList.add('active');
+}
+
+function closePalette(e) {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.remove('active');
+  popup.classList.remove('active');
 }
 
 randomColors();
