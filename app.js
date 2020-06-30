@@ -239,12 +239,17 @@ const submitSave = document.querySelector('.save-submit');
 const closeSave = document.querySelector('.close-save');
 const saveContainer = document.querySelector('.save-container');
 const saveInput = document.querySelector('.save-container input');
+const libraryContainer = document.querySelector('.library-container');
+const libraryBtn = document.querySelector('.library');
+const closeLibrary = document.querySelector('.close-library');
 
 //!! Event listeners
 
 saveBtn.addEventListener('click', openPalette);
 closeSave.addEventListener('click', closePalette);
 submitSave.addEventListener('click', savePalette);
+libraryBtn.addEventListener('click', openLibraryMenu);
+closeLibrary.addEventListener('click', closeLibraryMenu);
 
 //!! Functions
 
@@ -302,6 +307,14 @@ function savePalette(e) {
   paletteBtn.classList.add('pick-palette-btn');
   paletteBtn.classList.add(paletteObject.num);
   paletteBtn.innerText = 'Select';
+
+  // Append to library
+
+  palette.appendChild(title);
+  palette.appendChild(preview);
+  palette.appendChild(paletteBtn);
+
+  libraryContainer.children[0].appendChild(palette);
 }
 
 function saveToLocal(paletteObject) {
@@ -315,6 +328,18 @@ function saveToLocal(paletteObject) {
 
   localPalettes.push(paletteObject);
   localStorage.setItem('palettes', JSON.stringify(localPalettes));
+}
+
+function openLibraryMenu() {
+  const popup = libraryContainer.children[0];
+  libraryContainer.classList.add('active');
+  popup.classList.add('active');
+}
+
+function closeLibraryMenu() {
+  const popup = libraryContainer.children[0];
+  libraryContainer.classList.remove('active');
+  popup.classList.remove('active');
 }
 
 randomColors();
