@@ -276,7 +276,16 @@ function savePalette(e) {
   });
   // Generate object
 
-  let paletteNum = savedPalettes.length;
+  let paletteNum;
+
+  const paletteObjects = JSON.parse(localStorage.getItem('palettes'));
+
+  if (paletteObjects) {
+    paletteNum = paletteObjects.length;
+  } else {
+    paletteNum = savedPalettes.length;
+  }
+
   const paletteObject = { name, colors, num: paletteNum };
 
   savedPalettes.push(paletteObject);
@@ -363,9 +372,12 @@ function closeLibraryMenu() {
 
 function getLocal() {
   if (localStorage.getItem('palettes') === null) {
-    localStorage = [];
+    localPalettes = [];
   } else {
     const paletteObjects = JSON.parse(localStorage.getItem('palettes'));
+
+    savedPalettes = [...paletteObjects];
+
     paletteObjects.forEach((paletteObject) => {
       const palette = document.createElement('div');
       palette.classList.add('custom-palette');
