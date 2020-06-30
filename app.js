@@ -361,4 +361,60 @@ function closeLibraryMenu() {
   popup.classList.remove('active');
 }
 
+function getLocal() {
+  if (localStorage.getItem('palettes') === null) {
+    localStorage = [];
+  } else {
+    const paletteObjects = JSON.parse(localStorage.getItem('palettes'));
+    paletteObjects.forEach((paletteObject) => {
+      const palette = document.createElement('div');
+      palette.classList.add('custom-palette');
+
+      const title = document.createElement('h4');
+      title.innerText = paletteObject.name;
+
+      const preview = document.createElement('div');
+      preview.classList.add('small-preview');
+      paletteObject.colors.forEach((color) => {
+        const smallDiv = document.createElement('div');
+        smallDiv.style.backgroundColor = color;
+        preview.appendChild(smallDiv);
+      });
+
+      const paletteBtn = document.createElement('button');
+      paletteBtn.classList.add('pick-palette-btn');
+      paletteBtn.classList.add(paletteObject.num);
+      paletteBtn.innerText = 'Select';
+
+      // Attach event to button
+
+      paletteBtn.addEventListener('click', (e) => {
+        closeLibraryMenu();
+
+        const paletteIndex = e.target.classList[1];
+
+        initialColors = [];
+        paletteObjects[paletteIndex].colors.forEach((color, index) => {
+          initialColors.push(color);
+          colorPalettes[index].style.backgroundColor = color;
+          const text = colorPalettes[index].children[0];
+          checkContrast(color, text);
+          updateText(index);
+        });
+
+        resetInputs();
+      });
+
+      // Append to library
+
+      palette.appendChild(title);
+      palette.appendChild(preview);
+      palette.appendChild(paletteBtn);
+
+      libraryContainer.children[0].appendChild(palette);
+    });
+  }
+}
+
+getLocal();
 randomColors();
